@@ -17,3 +17,6 @@ class Company(models.Model):
     status = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
     data_updated_at = models.DateField(default=thirty_days_from_now)
+
+    def __str__(self) -> str:
+        return f"{self.name} - {self.cnpj}"
