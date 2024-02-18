@@ -3,6 +3,12 @@
 
 O presente projeto objetiva a simulação de um microSaaS para gerenciamento de Empresas e Usuários
 
+## Dependências
+
+- Django 4+
+- Celery 5+
+- Redis 5+
+
 ## Configuração
 
 ### Docker
@@ -33,6 +39,16 @@ Altere o arquivo .env-example para '.env' e insira suas configurações.
 Agora só executar as migrations:
 ```bash
   python manage.py migrate
+```
+
+### Celery
+Para iniciar o worker, utilize o seguinte comando no terminal:
+```bash
+celery -A core worker --loglevel=info
+```
+Para iniciar o beat (celery-beat), utilize o seguinte comando:
+```bash
+celery -A core beat -l info
 ```
 
 ## Documentação
