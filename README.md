@@ -1,3 +1,10 @@
+
+# Test SaaS Companies
+
+O presente projeto objetiva a simulação de um microSaaS para gerenciamento de Empresas e Usuários
+
+## Configuração
+
 ### Docker
 Instale os containers necessários para aplicação (Postgres e Redis):
 
@@ -27,3 +34,6 @@ Agora só executar as migrations:
 ```bash
   python manage.py migrate
 ```
+
+## Documentação
+A api utiliza Swagger para documentação. Este pode ser acessado através do link /swagger. Exemplo: http://localhost:8000/swagger/
