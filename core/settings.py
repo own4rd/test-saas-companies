@@ -143,3 +143,17 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
+
+
+# CELERY CONFIG
+from datetime import timedelta
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+CELERY_BEAT_SCHEDULE = {
+    "update-all-companies-info": {
+        "task": "companies.tasks.update_company_info_task",
+        "schedule": timedelta(days=1),
+    },
+}
