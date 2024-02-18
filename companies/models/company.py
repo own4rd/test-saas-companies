@@ -20,3 +20,14 @@ class Company(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} - {self.cnpj}"
+
+    def update_company_service(self):
+        import requests
+        response = requests.get(f"https://receitaws.com.br/v1/cnpj/{self.cnpj}")
+        data = response.json()
+        self.name = data["nome"]
+        self.trade_name = data["fantasia"]
+        self.status = data["situacao"]
+        self.updated_at = timezone.now()
+        self.data_updated_at = thirty_days_from_now()
+        self.save()
