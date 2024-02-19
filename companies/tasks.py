@@ -10,5 +10,14 @@ def update_company_info_task():
     current_date = date.today()
     companies_to_update = Company.objects.filter(data_updated_at=current_date)
     for company in companies_to_update:
-        company.update_company_service()
+        update_company_service_task.delay(company.id)
+
     logging.getLogger("End Updating Companies")
+
+@shared_task
+def update_company_service_task(company_id):
+    try:
+        company = Company.objects.get(id=company_id)
+        company.update_company_service()
+    except Exception:
+        logging.error(f"Erro ao atualizar {company_id}.")
